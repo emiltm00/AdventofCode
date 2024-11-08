@@ -18,11 +18,9 @@ public class code {
 
         String[] gameString = textLine.split(":");
         String[] cubesOneShow = gameString[1].split(";");
-        int i = 0;
-        int j = 0;
+   
         for (String cubesOneShowString : cubesOneShow) {
             String[] amountColorCube = cubesOneShowString.split(",");
-            j = 0;
             for (String amountColorCubeString : amountColorCube) {
                 String[] eachNumber = amountColorCubeString.split(" ");
                 int number = Integer.parseInt(eachNumber[1]);
@@ -39,9 +37,7 @@ public class code {
                         if (number > defaultBlue) possibleGame = false;
                         break;
                 }
-                j++;
             }
-            i++;
         }
         return possibleGame;
     }
