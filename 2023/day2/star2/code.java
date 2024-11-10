@@ -46,7 +46,7 @@ public class code {
         String[] gameString = textLine.split(":");
         String[] idString = gameString[0].split(" ");
         System.out.println("Valid Game: " + idString[1]);
-
+        
         return  Integer.parseInt(idString[1]);
     }
     public static void main(String[] args) {
