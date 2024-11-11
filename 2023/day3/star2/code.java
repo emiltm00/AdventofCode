@@ -4,22 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class code {
-    public static void printMatrix(char[][] matrix) {
-        // Print matrix
-        for (char[] column : matrix) {
-            System.out.print('[');
-            System.out.print(column[0] + ",");
-            for (int rows = 0; rows < column.length - 2; rows++) {
-                System.out.print(column[rows] + ",");
-            }
-            System.out.print(column[column.length - 1]);
-            System.out.println(']');
-        }
-    }
-
     public static void main(String[] args) {
-        String fileName = "/home/emil/AdventofCode/2023/day3/star1/data.txt";
-        //String fileName = "/home/emil/AdventofCode/2023/day3/star1/test.txt";
+        String fileName = "/home/emil/AdventofCode/2023/day3/star2/data.txt";
+        // String fileName = "/home/emil/AdventofCode/2023/day3/star2/test.txt";
         int row = 140;
         int col = 140;
         char[][] matrix = new char[row][col];
@@ -39,7 +26,7 @@ public class code {
             // Find symbols and check numbers around it
             for (int index_r = 0; index_r < row; index_r++) {
                 for (int index_c = 0; index_c < col; index_c++) {
-                    if (!Character.isDigit(matrix[index_r][index_c]) && matrix[index_r][index_c] != '.') {
+                    if (matrix[index_r][index_c] == '*') {
                         ArrayList<Integer> numbers = new ArrayList<>();
 
                         // Check row over
@@ -104,15 +91,16 @@ public class code {
                                 }
                             }
                         }
-                        for (Integer i : numbers) {
-                            totalSum += i;
+
+                        // If exactly two numbers were found, multiply them
+                        if (numbers.size() == 2) {
+                            totalSum += numbers.get(0) * numbers.get(1);
                         }
                     }
                 }
             }
 
             System.out.println("\nTotal Sum: " + totalSum);
-            System.out.println("Correct Answer: " + 521601);
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
