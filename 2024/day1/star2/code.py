@@ -14,10 +14,14 @@ with open(file_path_input, "r") as file:
 array_left.sort()
 array_right.sort()
 
-index = 0
+count = 0
 sum = 0
-for value in array_left:
-    sum += abs(value - array_right[index])
-    index += 1
-
-print(F"Sum: {sum}") 
+for value_left in array_left:
+    count = 0
+    for value_right in array_right:
+        if value_left < value_right:
+            break
+        if value_left == value_right:
+            count += 1
+    sum += value_left * count
+print(F"Sum is: {sum}")
