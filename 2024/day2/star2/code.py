@@ -29,8 +29,6 @@ def testSwitchedLevels(levelList):
             return True
         levelList = originalLevels[:]
 
-
-
 sum = 0
 with open(file_path_input,"r") as file:
     for report in file.readlines():
