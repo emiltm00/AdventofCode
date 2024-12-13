@@ -1,7 +1,7 @@
 file_path_test = "/home/emil/AdventofCode/2024/day2/star2/test.txt"
 file_path_input = "/home/emil/AdventofCode/2024/day2/star2/input.txt"
 
-def testLevels(levelsTest) -> bool:
+def testLevels(levelsTest):
     prev_val = None
     prev_diff = 0
     safe = True
