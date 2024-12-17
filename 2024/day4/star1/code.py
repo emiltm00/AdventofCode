@@ -4,37 +4,34 @@ file_path_input = "2024/day4/star1/input.txt"
 file_path_test = "2024/day4/star1/test.txt"
 with open(file_path_input, 'r') as file:
     input = file.readlines()
+input = [line.strip('\n') for line in input]
 
 """
-Find diagonals
+Find diagonals by shifting the lines to make diagonals vertical,
+    adding '.' to each side to make this possible.
+
+    |A| B C    . . |A| B C        
+    D |E| F -> . D |E| F .
+    G H |I|    G H |I| . .
 """
-diagonal_right= []
-diagonal_left= []
-count1 = len(input) - 1
-count2 = 0
-for right_line in input:
-    right_line = right_line.strip('\n')
-    left_line = right_line
-    for stack1 in range(count1):
-        right_line = '.' + right_line
-        left_line= left_line + '.'
-    for stack2 in range(count2):
-        right_line = right_line + '.'
-        left_line = '.' + left_line
-    diagonal_right.append(right_line)
-    diagonal_left.append(left_line)
-    count1 -= 1
-    count2 += 1
+diagonal_right= [
+    '.' * (len(input) - 1 - i) + line + '.' * i
+    for i, line in enumerate(input)
+]
+diagonal_left= [
+    '.' * i + line + '.' * (len(input) - 1 - i)
+    for i, line in enumerate(input)
+]
 
 def get_vertical(m: list) -> list:
     """
     Return a list with strings of the verticals of the input
     """
     return_list = []
-    for element in range(len(m[len(m)-1])):
+    for col in range(len(m[len(m)-1])):
         temp_list = ''
         for line in range(len(m)):
-            temp_list = temp_list + (m[line][element])
+            temp_list = temp_list + (m[line][col])
         return_list.append(temp_list)
     return return_list
 
@@ -52,9 +49,5 @@ vertical_input = get_vertical(input)
 vertical_diagonal_right = get_vertical(diagonal_right)
 vertical_diagonal_left = get_vertical(diagonal_left)
 
-total_sum = 0
-total_sum += search(input)
-total_sum += search(vertical_input)
-total_sum += search(vertical_diagonal_right)
-total_sum += search(vertical_diagonal_left)
+total_sum = search(input) + search(vertical_input) + search(vertical_diagonal_right) + search(vertical_diagonal_left) 
 print(f'{total_sum = }')
