@@ -1,10 +1,10 @@
 import re
 
-file_path_input = "2024/day4/star1/input.txt"
+file_path_input = "/home/emil/AdventofCode/2024/day4/star1/input.txt"
 file_path_test = "2024/day4/star1/test.txt"
 with open(file_path_input, 'r') as file:
-    input = file.readlines()
-input = [line.strip('\n') for line in input]
+    input_content = file.readlines()
+input_content = [line.strip('\n') for line in input_content]
 
 """
 Find diagonals by shifting the lines to make diagonals vertical,
@@ -15,12 +15,12 @@ Find diagonals by shifting the lines to make diagonals vertical,
     G H |I|    G H |I| . .
 """
 diagonal_right= [
-    '.' * (len(input) - 1 - i) + line + '.' * i
-    for i, line in enumerate(input)
+    '.' * (len(input_content) - 1 - i) + line + '.' * i
+    for i, line in enumerate(input_content)
 ]
 diagonal_left= [
-    '.' * i + line + '.' * (len(input) - 1 - i)
-    for i, line in enumerate(input)
+    '.' * i + line + '.' * (len(input_content) - 1 - i)
+    for i, line in enumerate(input_content)
 ]
 
 def get_vertical(m: list) -> list:
@@ -45,9 +45,9 @@ def search(m: list) -> int:
        temp_sum += len(re.findall(r'(?=XMAS)|(?=SAMX)',line))
     return temp_sum
 
-vertical_input = get_vertical(input)
+vertical_input = get_vertical(input_content)
 vertical_diagonal_right = get_vertical(diagonal_right)
 vertical_diagonal_left = get_vertical(diagonal_left)
 
-total_sum = search(input) + search(vertical_input) + search(vertical_diagonal_right) + search(vertical_diagonal_left) 
+total_sum = search(input_content) + search(vertical_input) + search(vertical_diagonal_right) + search(vertical_diagonal_left)
 print(f'{total_sum = }')
